@@ -13,14 +13,14 @@ Binny V A, http://www.openjs.com/scripts/events/keyboard_shortcuts/
     if jQuery? 
       ((jQuery) ->
         isTextAcceptingInput = (element) ->
-          /textarea|select/i.test(element.nodeName) || element.type == "text" || element.type == "password"
-      
+          /textarea|select/i.test(element.nodeName) or element.type is "text" or element.type is "password"
+
         isFunctionKey = (event) ->
           (event.type != "keypress") && (112 <= event.which <= 123)
-      
+
         jQuery.hotkeys =
-          version: "0.8"
-      
+          version: "0.9.0"
+
           specialKeys:
             8: "backspace"
             9: "tab"
@@ -82,7 +82,7 @@ Binny V A, http://www.openjs.com/scripts/events/keyboard_shortcuts/
             221: "]"
             222: "'"
             224: "meta"
-      
+
           shiftNums:
             "`": "~"
             "1": "!"
@@ -103,43 +103,43 @@ Binny V A, http://www.openjs.com/scripts/events/keyboard_shortcuts/
             ".": ">"
             "/": "?"
             "\\": "|"
-      
+
         keyHandler = (handleObj) ->
           # Only care when a possible input has been specified
           if typeof handleObj.data != "string"
             return
-      
+
           origHandler = handleObj.handler
           keys = handleObj.data.toLowerCase().split(" ")
-      
-          handleObj.handler = (event) ->
+
+          handleObj.handler = (event) ->          
             # Keypress represents characters, not special keys
             special = event.type != "keypress" && jQuery.hotkeys.specialKeys[ event.which ]
             character = String.fromCharCode( event.which ).toLowerCase()
             modif = ""
             possible = {}
             target = event.target
-      
+
             # check combinations (alt|ctrl|shift+anything)
             if event.altKey && special != "alt"
               modif += "alt+"
-      
+
             if event.ctrlKey && special != "ctrl"
               modif += "ctrl+"
-      
+
             # TODO: Need to make sure this works consistently across platforms
             if event.metaKey && !event.ctrlKey && special != "meta"
               modif += "meta+"
-      
+
             # Don't fire in text-accepting inputs that we didn't directly bind to
             # unless a non-shift modifier key or function key is pressed
             unless this == target
               if isTextAcceptingInput(target) && !modif && !isFunctionKey(event)
                 return
-      
+
             if event.shiftKey && special != "shift"
               modif += "shift+"
-      
+
             if special
               possible[ modif + special ] = true
             else
@@ -149,15 +149,14 @@ Binny V A, http://www.openjs.com/scripts/events/keyboard_shortcuts/
               # "$" can be triggered as "Shift+4" or "Shift+$" or just "$"
               if modif == "shift+"
                 possible[ jQuery.hotkeys.shiftNums[ character ] ] = true
-      
+
             for key in keys
               if possible[key]
                 return origHandler.apply( this, arguments )
-      
-      
+
         jQuery.each [ "keydown", "keyup", "keypress" ], ->
           jQuery.event.special[ this ] = { add: keyHandler }
-      
+
       )(jQuery)
     else
       console.warn "jQuery not found, no hotkeys added :("
