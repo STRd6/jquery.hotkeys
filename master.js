@@ -10,7 +10,7 @@
         return (event.type !== "keypress") && ((112 <= (_ref = event.which) && _ref <= 123));
       };
       jQuery.hotkeys = {
-        version: "0.8",
+        version: "0.9.0",
         specialKeys: {
           8: "backspace",
           9: "tab",
