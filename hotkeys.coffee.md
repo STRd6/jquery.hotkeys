@@ -10,7 +10,7 @@ http://github.com/tzuryby/hotkeys
 Original idea by:
 Binny V A, http://www.openjs.com/scripts/events/keyboard_shortcuts/
 
-    if jQuery? 
+    if jQuery?
       ((jQuery) ->
         isTextAcceptingInput = (element) ->
           /textarea|select/i.test(element.nodeName) or element.type is "text" or element.type is "password"
@@ -112,7 +112,7 @@ Binny V A, http://www.openjs.com/scripts/events/keyboard_shortcuts/
           origHandler = handleObj.handler
           keys = handleObj.data.toLowerCase().split(" ")
 
-          handleObj.handler = (event) ->          
+          handleObj.handler = (event) ->
             # Keypress represents characters, not special keys
             special = event.type != "keypress" && jQuery.hotkeys.specialKeys[ event.which ]
             character = String.fromCharCode( event.which ).toLowerCase()
@@ -145,7 +145,7 @@ Binny V A, http://www.openjs.com/scripts/events/keyboard_shortcuts/
             else
               possible[ modif + character ] = true
               possible[ modif + jQuery.hotkeys.shiftNums[ character ] ] = true
-      
+
               # "$" can be triggered as "Shift+4" or "Shift+$" or just "$"
               if modif == "shift+"
                 possible[ jQuery.hotkeys.shiftNums[ character ] ] = true
