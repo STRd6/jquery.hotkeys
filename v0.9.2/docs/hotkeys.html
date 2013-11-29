@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>hotkeys</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="http://strd6.github.io/cdn/parallel/docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    <ul class="sections">
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              <div class="pilwrap">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <h1 id="jquery-hotkeys-plugin">jQuery Hotkeys Plugin</h1>
+
+            </div>
+            <div class="content"><pre><code class="lang-coffeescript">
+</code></pre>
+</div>
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              <div class="pilwrap">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Copyright 2010, John Resig
+Dual licensed under the MIT or GPL Version 2 licenses.</p>
+<p>Based upon the plugin by Tzury Bar Yochay:
+<a href="http://github.com/tzuryby/hotkeys">http://github.com/tzuryby/hotkeys</a></p>
+<p>Original idea by:
+Binny V A, <a href="http://www.openjs.com/scripts/events/keyboard_shortcuts/">http://www.openjs.com/scripts/events/keyboard_shortcuts/</a></p>
+
+            </div>
+            <div class="content"><pre><code class="lang-coffeescript"><span class="keyword">if</span> jQuery?
+  ((jQuery) -&gt;
+    <span class="function"><span class="title">isTextAcceptingInput</span></span> = (element) -&gt;
+      <span class="regexp">/textarea|select/i</span>.test(element.nodeName) <span class="keyword">or</span> element.type <span class="keyword">is</span> <span class="string">"text"</span> <span class="keyword">or</span> element.type <span class="keyword">is</span> <span class="string">"password"</span>
+
+    <span class="function"><span class="title">isFunctionKey</span></span> = (event) -&gt;
+      (event.type != <span class="string">"keypress"</span>) &amp;&amp; (<span class="number">112</span> &lt;= event.which &lt;= <span class="number">123</span>)
+
+    jQuery.hotkeys =
+      version: <span class="string">"0.9.0"</span>
+
+      specialKeys:
+        <span class="number">8</span>: <span class="string">"backspace"</span>
+        <span class="number">9</span>: <span class="string">"tab"</span>
+        <span class="number">13</span>: <span class="string">"return"</span>
+        <span class="number">16</span>: <span class="string">"shift"</span>
+        <span class="number">17</span>: <span class="string">"ctrl"</span>
+        <span class="number">18</span>: <span class="string">"alt"</span>
+        <span class="number">19</span>: <span class="string">"pause"</span>
+        <span class="number">20</span>: <span class="string">"capslock"</span>
+        <span class="number">27</span>: <span class="string">"esc"</span>
+        <span class="number">32</span>: <span class="string">"space"</span>
+        <span class="number">33</span>: <span class="string">"pageup"</span>
+        <span class="number">34</span>: <span class="string">"pagedown"</span>
+        <span class="number">35</span>: <span class="string">"end"</span>
+        <span class="number">36</span>: <span class="string">"home"</span>
+        <span class="number">37</span>: <span class="string">"left"</span>
+        <span class="number">38</span>: <span class="string">"up"</span>
+        <span class="number">39</span>: <span class="string">"right"</span>
+        <span class="number">40</span>: <span class="string">"down"</span>
+        <span class="number">45</span>: <span class="string">"insert"</span>
+        <span class="number">46</span>: <span class="string">"del"</span>
+        <span class="number">96</span>: <span class="string">"0"</span>
+        <span class="number">97</span>: <span class="string">"1"</span>
+        <span class="number">98</span>: <span class="string">"2"</span>
+        <span class="number">99</span>: <span class="string">"3"</span>
+        <span class="number">100</span>: <span class="string">"4"</span>
+        <span class="number">101</span>: <span class="string">"5"</span>
+        <span class="number">102</span>: <span class="string">"6"</span>
+        <span class="number">103</span>: <span class="string">"7"</span>
+        <span class="number">104</span>: <span class="string">"8"</span>
+        <span class="number">105</span>: <span class="string">"9"</span>
+        <span class="number">106</span>: <span class="string">"*"</span>
+        <span class="number">107</span>: <span class="string">"+"</span>
+        <span class="number">109</span>: <span class="string">"-"</span>
+        <span class="number">110</span>: <span class="string">"."</span>
+        <span class="number">111</span> : <span class="string">"/"</span>
+        <span class="number">112</span>: <span class="string">"f1"</span>
+        <span class="number">113</span>: <span class="string">"f2"</span>
+        <span class="number">114</span>: <span class="string">"f3"</span>
+        <span class="number">115</span>: <span class="string">"f4"</span>
+        <span class="number">116</span>: <span class="string">"f5"</span>
+        <span class="number">117</span>: <span class="string">"f6"</span>
+        <span class="number">118</span>: <span class="string">"f7"</span>
+        <span class="number">119</span>: <span class="string">"f8"</span>
+        <span class="number">120</span>: <span class="string">"f9"</span>
+        <span class="number">121</span>: <span class="string">"f10"</span>
+        <span class="number">122</span>: <span class="string">"f11"</span>
+        <span class="number">123</span>: <span class="string">"f12"</span>
+        <span class="number">144</span>: <span class="string">"numlock"</span>
+        <span class="number">145</span>: <span class="string">"scroll"</span>
+        <span class="number">186</span>: <span class="string">";"</span>
+        <span class="number">187</span>: <span class="string">"="</span>
+        <span class="number">188</span>: <span class="string">","</span>
+        <span class="number">189</span>: <span class="string">"-"</span>
+        <span class="number">190</span>: <span class="string">"."</span>
+        <span class="number">191</span>: <span class="string">"/"</span>
+        <span class="number">219</span>: <span class="string">"["</span>
+        <span class="number">220</span>: <span class="string">"\\"</span>
+        <span class="number">221</span>: <span class="string">"]"</span>
+        <span class="number">222</span>: <span class="string">"'"</span>
+        <span class="number">224</span>: <span class="string">"meta"</span>
+
+      shiftNums:
+        <span class="string">"`"</span>: <span class="string">"~"</span>
+        <span class="string">"1"</span>: <span class="string">"!"</span>
+        <span class="string">"2"</span>: <span class="string">"@"</span>
+        <span class="string">"3"</span>: <span class="string">"#"</span>
+        <span class="string">"4"</span>: <span class="string">"$"</span>
+        <span class="string">"5"</span>: <span class="string">"%"</span>
+        <span class="string">"6"</span>: <span class="string">"^"</span>
+        <span class="string">"7"</span>: <span class="string">"&amp;"</span>
+        <span class="string">"8"</span>: <span class="string">"*"</span>
+        <span class="string">"9"</span>: <span class="string">"("</span>
+        <span class="string">"0"</span>: <span class="string">")"</span>
+        <span class="string">"-"</span>: <span class="string">"_"</span>
+        <span class="string">"="</span>: <span class="string">"+"</span>
+        <span class="string">";"</span>: <span class="string">":"</span>
+        <span class="string">"'"</span>: <span class="string">"\""</span>
+        <span class="string">","</span>: <span class="string">"&lt;"</span>
+        <span class="string">"."</span>: <span class="string">"&gt;"</span>
+        <span class="string">"/"</span>: <span class="string">"?"</span>
+        <span class="string">"\\"</span>: <span class="string">"|"</span>
+
+    <span class="function"><span class="title">keyHandler</span></span> = (handleObj) -&gt;
+      <span class="comment"># Only care when a possible input has been specified</span>
+      <span class="keyword">if</span> <span class="keyword">typeof</span> handleObj.data != <span class="string">"string"</span>
+        <span class="keyword">return</span>
+
+      origHandler = handleObj.handler
+      keys = handleObj.data.toLowerCase().split(<span class="string">" "</span>)
+
+      handleObj.<span class="function"><span class="title">handler</span></span> = (event) -&gt;
+        <span class="comment"># Keypress represents characters, not special keys</span>
+        special = event.type != <span class="string">"keypress"</span> &amp;&amp; jQuery.hotkeys.specialKeys[ event.which ]
+        character = String.fromCharCode( event.which ).toLowerCase()
+        modif = <span class="string">""</span>
+        possible = {}
+        target = event.target
+
+        <span class="comment"># check combinations (alt|ctrl|shift+anything)</span>
+        <span class="keyword">if</span> event.altKey &amp;&amp; special != <span class="string">"alt"</span>
+          modif += <span class="string">"alt+"</span>
+
+        <span class="keyword">if</span> event.ctrlKey &amp;&amp; special != <span class="string">"ctrl"</span>
+          modif += <span class="string">"ctrl+"</span>
+
+        <span class="comment"># TODO: Need to make sure this works consistently across platforms</span>
+        <span class="keyword">if</span> event.metaKey &amp;&amp; !event.ctrlKey &amp;&amp; special != <span class="string">"meta"</span>
+          modif += <span class="string">"meta+"</span>
+
+        <span class="comment"># Don't fire in text-accepting inputs that we didn't directly bind to</span>
+        <span class="comment"># unless a non-shift modifier key or function key is pressed</span>
+        <span class="keyword">unless</span> <span class="keyword">this</span> == target
+          <span class="keyword">if</span> isTextAcceptingInput(target) &amp;&amp; !modif &amp;&amp; !isFunctionKey(event)
+            <span class="keyword">return</span>
+
+        <span class="keyword">if</span> event.shiftKey &amp;&amp; special != <span class="string">"shift"</span>
+          modif += <span class="string">"shift+"</span>
+
+        <span class="keyword">if</span> special
+          possible[ modif + special ] = <span class="literal">true</span>
+        <span class="keyword">else</span>
+          possible[ modif + character ] = <span class="literal">true</span>
+          possible[ modif + jQuery.hotkeys.shiftNums[ character ] ] = <span class="literal">true</span>
+
+          <span class="comment"># "$" can be triggered as "Shift+4" or "Shift+$" or just "$"</span>
+          <span class="keyword">if</span> modif == <span class="string">"shift+"</span>
+            possible[ jQuery.hotkeys.shiftNums[ character ] ] = <span class="literal">true</span>
+
+        <span class="keyword">for</span> key <span class="keyword">in</span> keys
+          <span class="keyword">if</span> possible[key]
+            <span class="keyword">return</span> origHandler.apply( <span class="keyword">this</span>, arguments )
+
+    jQuery.each [ <span class="string">"keydown"</span>, <span class="string">"keyup"</span>, <span class="string">"keypress"</span> ], -&gt;
+      jQuery.event.special[ <span class="keyword">this</span> ] = { add: keyHandler }
+
+  )(jQuery)
+<span class="keyword">else</span>
+  console.warn <span class="string">"jQuery not found, no hotkeys added :("</span></code></pre>
+</div>
+        </li>
+        
+    </ul>
+  </div>
+  <script src="//code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.6.3/coffee-script.min.js"></script>
+<script src="http://strd6.github.io/require/v0.2.2.js"></script><script>
+  $.ajax({
+    url: "http://strd6.github.io/interactive/v0.8.1.jsonp",
+    dataType: "jsonp",
+    jsonpCallback: "STRd6/interactive:v0.8.1",
+    cache: true
+  }).then(function(PACKAGE) {
+    Require.generateFor(PACKAGE)("./" + PACKAGE.entryPoint)
+  })
+</script><script src="package.js"></script>
+</body>
+</html>
